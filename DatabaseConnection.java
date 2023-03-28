@@ -37,9 +37,32 @@ public class DatabaseConnection {
         preparedStatements.executeUpdate();
         System.out.println("Record updated........");
     }
+    public double getSalaryFromDB(String name) throws Exception {
+        preparedStatements = connection.prepareStatement("SELECT BASIC_PAY FROM EMPLOYEE_PAYROLL WHERE NAME = ?");
+        preparedStatements.setString(1, name);
+        resultSet = preparedStatements.executeQuery();
+        double sal = 0;
+        while (resultSet.next()) {
+            sal = resultSet.getDouble(1);
+        }
+        return sal;
+    }
     public void close() throws Exception{
         connection.close();
         System.out.println("Connection closed.....");
     }
+    public void updateDate(String date) throws Exception {
+        preparedStatements = connection.prepareStatement("SELECT * FROM employee_payroll WHERE CAST(? AS DATE) AND DATE(NOW())");
+        preparedStatements.setDate(1, java.sql.Date.valueOf(date));
+        resultSet = preparedStatements.executeQuery();
+        while (resultSet.next()) {
+            System.out.println(resultSet.getInt(1)+" "+resultSet.getString(2)+" "+resultSet.getString(3)
+                    +" "+resultSet.getDouble(4)+"  "+resultSet.getDouble(5)
+                    +"  "+resultSet.getDouble(6)+"  "+resultSet.getDouble(7)
+                    +"  "+resultSet.getDouble(8)+"  "+resultSet.getDate(9)
+                    +"  "+resultSet.getString(10)+"  "+resultSet.getString(11));
+        }
+    }
 }
+
 
