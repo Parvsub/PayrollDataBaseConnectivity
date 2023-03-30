@@ -9,8 +9,7 @@ public class EmployeePayroll {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int choice = -1;
         while (choice!=0){
-            System.out.println("Enter your choice:\n1. DISPLAY EMPLOYEE PAYROLL\n2. UPDATE SALARY\n3. GET EMPLOYEE LIST WHO " +
-                    "JOINED IN PARTICULAR DATE RANGE\n4. DISPLAY MIN,MAX,AVG,COUNT\n0. EXIT");
+            System.out.println("Enter your choice:\n1. DISPLAY EMPLOYEE PAYROLL\n2. UPDATE SALARY\n0. EXIT");
             choice = Integer.parseInt(br.readLine());
             switch (choice){
                 case 1: con.display();
@@ -21,14 +20,6 @@ public class EmployeePayroll {
                     System.out.println("Enter the basic pay to update");
                     Double pay = Double.parseDouble(br.readLine());
                     con.update(name,pay);
-                    break;
-                case 3:
-                    System.out.println("Enter the date in format eg. '2020-01-10' ");
-                    String Date = br.readLine();
-                    con.updateDate(Date);
-                    break;
-                case 4:
-                    con.FindMultipleValues();
                     break;
                 case 0:
                     con.close();
